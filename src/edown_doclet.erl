@@ -1,5 +1,5 @@
 %%==============================================================================
-%% Copyright 2010 Erlang Solutions Ltd.
+%% Copyright 2014 Ulf Wiger
 %%
 %% Licensed under the Apache License, Version 2.0 (the "License");
 %% you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 %% limitations under the License.
 %%==============================================================================
 %% @author Ulf Wiger <ulf@wiger.net>
-%% @copyright 2010 Erlang Solutions Ltd
+%% @copyright 2014 Ulf Wiger
 %% @end
 %% =============================================================================
 %% Modified 2012 by Beads Land-Trujillo:  get_git_branch/0, redirect_href/3
@@ -319,11 +319,11 @@ source({M, P, Name, Path}, Dir, Suffix, Env, Set, Private, Hidden,
 
 guess_encoding(File) ->
     try epp:read_encoding(File) of
-        none -> latin1;
+        none -> epp:default_encoding();
         Enc  -> Enc
     catch
         _:_ ->
-            latin1
+            epp:default_encoding()
     end.
 
 write_file(Text, Dir, F) ->
